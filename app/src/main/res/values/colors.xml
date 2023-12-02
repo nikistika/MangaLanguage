@@ -2,6 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="black_blue">#1C1B1F</color>
+    <color name="black_blue">#19181C</color>
+    <color name="grey_background_text">#F1F1F1</color>
+
+    <color name="silver_background_items">#D9D9D9</color>
+    <color name="silver_background">#A9A9A9</color>
+    <color name="black_text_and_icons">#303030</color>
+    <color name="black_text">#1C1B1F</color>
+
+
+    <color name="white_text">#FFFFFF</color>
+
+
+
 
 </resources>

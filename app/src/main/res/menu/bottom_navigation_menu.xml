@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id= "@+id/favoriteManga"
+        android:title="@string/library_manga"
+        android:icon="@drawable/baseline_favorite_border_24"/>
+<item
+        android:id= "@+id/cardsManga"
+        android:title="@string/cards_manga"
+        android:icon="@drawable/baseline_view_agenda_24"/>
+
+<item
+        android:id= "@+id/wordsManga"
+        android:title="@string/words_manga"
+        android:icon="@drawable/baseline_book_24"/>
+
+<item
+        android:id= "@+id/settingManga"
+        android:title="@string/setting_manga"
+        android:icon="@drawable/baseline_settings_24"/>
+
+</menu>
