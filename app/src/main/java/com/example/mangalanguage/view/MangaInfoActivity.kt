@@ -17,8 +17,6 @@ import com.example.mangalanguage.R
 import com.example.mangalanguage.databinding.ActivityMangaInfoBinding
 import com.example.mangalanguage.models.MangaDex.MangaChapterResult
 import com.example.mangalanguage.models.MangaDex.MangaChapters.MangaChapter
-import com.example.mangalanguage.models.MangaDex.MangaData.MangaData
-import com.example.mangalanguage.models.chapterList
 import com.example.mangalanguage.network.MangaApiClient
 import com.example.mangalanguage.network.MangaDexApiService
 import com.google.android.material.appbar.MaterialToolbar
@@ -27,7 +25,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MangaInfoActivity : AppCompatActivity() {
 
@@ -39,7 +39,6 @@ class MangaInfoActivity : AppCompatActivity() {
     lateinit var mangaTextTitle: MaterialTextView
     lateinit var mangaTextDescription: MaterialTextView
     lateinit var readButton: MaterialButton
-    lateinit var bottomNavigationView: BottomNavigationView
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: MangaInfoAdapter
 
@@ -49,6 +48,10 @@ class MangaInfoActivity : AppCompatActivity() {
 
     private val mangaChapterLD: MutableLiveData<MangaChapter> = MutableLiveData()
     val mangaChapterLDResult: LiveData<MangaChapter> = mangaChapterLD
+
+    val idChapterLD: MutableLiveData<String> = MutableLiveData()
+    val idChapterLDResult: LiveData<String> = idChapterLD
+
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +65,6 @@ class MangaInfoActivity : AppCompatActivity() {
         mangaTextTitle = binding.mangaTextTitle
         mangaTextDescription = binding.mangaTextDescription
         readButton = binding.readButton
-        bottomNavigationView = binding.bottomNavigationView
 
         recyclerView = binding.chapterRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -93,13 +95,17 @@ class MangaInfoActivity : AppCompatActivity() {
 
 //        }
 
-        lifecycleScope.launch {
-            val getMangaChapter = getMangaChapters(mangaId, 0)
-            Log.d("MyLog", "getMangaChapter: $getMangaChapter")
-            mangaChapterLD.postValue(getMangaChapter)
+        lifecycleScope.launch(Dispatchers.IO) {
+
+                    val getMangaChapter = getMangaChapters(mangaId, 0)
+                    mangaChapterLD.postValue(getMangaChapter)
+
+
         }
 
         chapterResultList = mutableListOf()
+
+        var firstItem = true
 
         mangaChapterLDResult.observe(this, Observer {
 
@@ -111,28 +117,47 @@ class MangaInfoActivity : AppCompatActivity() {
                 title = mangaChapter.attributes.title,
                 publishAt = mangaChapter.attributes.publishAt
             )
+                Log.d("MyLog", "chapterResult: $chapterResult")
 
                 chapterResultList.add(chapterResult)
-                Log.d("MyLog", "chapterResultList: $chapterResultList")
             }
+            Log.d("MyLog", "chapterResultList: $chapterResultList")
 
-            adapter = MangaInfoAdapter(chapterResultList)
-            recyclerView.adapter = adapter
 
+            if (firstItem) {
+                adapter = MangaInfoAdapter(chapterResultList, this@MangaInfoActivity)
+                recyclerView.adapter = adapter
+                firstItem = false
+            }
+//            else {
+//                (recyclerView.adapter as MangaInfoAdapter).addItems(chapterResultList)
+//            }
         })
 
-        val chapterList = listOf<chapterList>(
-            chapterList("Глава 1", "25.11.1998"),
-            chapterList("Глава 2", "25.11.1998"),
-            chapterList("Глава 3", "25.11.1998"),
-            chapterList("Глава 4", "25.11.1998"),
-            chapterList("Глава 5", "25.11.1998"),
-            chapterList("Глава 6", "25.11.1998"),
-            chapterList("Глава 7", "25.11.1998"),
-            chapterList("Глава 8", "25.11.1998"),
-            chapterList("Глава 9", "25.11.1998"),
-            chapterList("Глава 10", "25.11.1998")
-        )
+
+        idChapterLDResult.observe(this, Observer {
+            val intent = Intent(this, ReaderActivity2::class.java)
+            intent.putExtra("message_key", it)
+            //TODO Исправить тип листа
+            startActivity(intent)
+        })
+
+//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                if (!recyclerView.canScrollVertically(1)) {
+//
+//                    lifecycleScope.launch {
+//                        val getMangaChapter = withContext(Dispatchers.IO) {
+//                            val chapterSizeList = (recyclerView.adapter as MangaInfoAdapter).itemCount
+//                            getMangaChapters(mangaId, chapterSizeList)
+//                        }
+//                        mangaChapterLD.postValue(getMangaChapter)
+//                    }
+//                    Toast.makeText(this@MangaInfoActivity, "ScrollEnd", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        })
 
 
 

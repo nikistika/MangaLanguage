@@ -2,9 +2,11 @@ package com.example.mangalanguage.network
 
 import com.example.mangalanguage.models.MangaDex.MangaChapters.MangaChapter
 import com.example.mangalanguage.models.MangaDex.MangaData.MangaData
+import com.example.mangalanguage.models.MangaDex.MangaImage.MangaImage
 
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MangaDexApiService {
@@ -23,6 +25,11 @@ interface MangaDexApiService {
         @Query("order[chapter]") order: String = "asc",
         @Query("limit") limit: Int = 100,
     ): Response<MangaChapter>
+
+    @GET("at-home/server/{chapterId}")
+    suspend fun getMangaImage(
+        @Path("chapterId") chapterId: String?
+    ): Response<MangaImage>
 
 }
 

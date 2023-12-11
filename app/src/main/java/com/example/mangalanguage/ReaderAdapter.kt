@@ -9,11 +9,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 class ReaderAdapter(private val activity: ReaderActivity, private val readerImageList: List<String>) :
-    RecyclerView.Adapter<ReaderAdapter.ViewHolder>(){
+    RecyclerView.Adapter<ReaderAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: ItemReaderBinding) : RecyclerView.ViewHolder(binding.root) {
+    //TODO С помощью gpt улучшить код, подправить параметры
 
-        fun bindItem(activity: ReaderActivity, reader: String){
+    class ViewHolder(private val binding: ItemReaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bindItem(activity: ReaderActivity, reader: String) {
 
             val fab: FloatingActionButton = binding.itemReaderFloatingButton
             val imageView = binding.imageView
@@ -27,20 +30,28 @@ class ReaderAdapter(private val activity: ReaderActivity, private val readerImag
                 .into(imageView)
 
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemReaderBinding.inflate(LayoutInflater.from(parent.context),
-            parent, false)
+        val binding = ItemReaderBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent, false
+        )
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val reader = readerImageList[position]
         holder.bindItem(activity, reader)
+
+
     }
+
 
     override fun getItemCount(): Int {
         return readerImageList.size
     }
+
 }

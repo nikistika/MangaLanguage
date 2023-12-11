@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mangalanguage.R
-import com.example.mangalanguage.ViewPagerAdapter
+import com.example.mangalanguage.MainViewPagerAdapter
 import com.example.mangalanguage.databinding.ActivityMainBinding
 import com.example.mangalanguage.view.main_fragments.CardFragment
 import com.example.mangalanguage.view.main_fragments.FavoriteFragment
 import com.example.mangalanguage.view.main_fragments.SettingFragment
 import com.example.mangalanguage.view.main_fragments.WordsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabLayoutMediator
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -63,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             SettingFragment.newInstance()
         )
 
-        viewPager.adapter = ViewPagerAdapter(this, fragmentList)
+        viewPager.adapter = MainViewPagerAdapter(this, fragmentList)
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
