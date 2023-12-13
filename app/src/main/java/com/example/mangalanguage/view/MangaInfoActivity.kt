@@ -40,7 +40,10 @@ class MangaInfoActivity : AppCompatActivity() {
     lateinit var mangaTextDescription: MaterialTextView
     lateinit var readButton: MaterialButton
     lateinit var recyclerView: RecyclerView
-    lateinit var adapter: MangaInfoAdapter
+
+    private val adapter: MangaInfoAdapter by lazy {
+        MangaInfoAdapter(chapterResultList, this@MangaInfoActivity)
+    }
 
     lateinit var chapterResultList: MutableList<MangaChapterResult>
 
@@ -49,7 +52,7 @@ class MangaInfoActivity : AppCompatActivity() {
     private val mangaChapterLD: MutableLiveData<MangaChapter> = MutableLiveData()
     val mangaChapterLDResult: LiveData<MangaChapter> = mangaChapterLD
 
-    val idChapterLD: MutableLiveData<String> = MutableLiveData()
+    private val idChapterLD: MutableLiveData<String> = MutableLiveData()
     val idChapterLDResult: LiveData<String> = idChapterLD
 
 
@@ -72,7 +75,7 @@ class MangaInfoActivity : AppCompatActivity() {
         mangadexApi = MangaApiClient.getInstance().create(MangaDexApiService::class.java)
 
 
-//        if (intent != null) {
+
             val mangaId = intent.getStringExtra("mangaId")
             Log.d("MyLog", "mangaId: $mangaId")
 
@@ -95,17 +98,25 @@ class MangaInfoActivity : AppCompatActivity() {
 
 //        }
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
 
                     val getMangaChapter = getMangaChapters(mangaId, 0)
                     mangaChapterLD.postValue(getMangaChapter)
+
+//                    val getMangaChapter2 = getMangaChapters(mangaId, 100)
+//                    mangaChapterLD.postValue(getMangaChapter2)
+//
+//  val getMangaChapter3 = getMangaChapters(mangaId, 200)
+//                    mangaChapterLD.postValue(getMangaChapter3)
+//
+//  val getMangaChapter4 = getMangaChapters(mangaId, 300)
+//                    mangaChapterLD.postValue(getMangaChapter4)
 
 
         }
 
         chapterResultList = mutableListOf()
 
-        var firstItem = true
 
         mangaChapterLDResult.observe(this, Observer {
 
@@ -114,8 +125,7 @@ class MangaInfoActivity : AppCompatActivity() {
             val chapterResult = MangaChapterResult(
                 id = mangaChapter.id,
                 chapter = mangaChapter.attributes.chapter,
-                title = mangaChapter.attributes.title,
-                publishAt = mangaChapter.attributes.publishAt
+                title = mangaChapter.attributes.title
             )
                 Log.d("MyLog", "chapterResult: $chapterResult")
 
@@ -124,14 +134,9 @@ class MangaInfoActivity : AppCompatActivity() {
             Log.d("MyLog", "chapterResultList: $chapterResultList")
 
 
-            if (firstItem) {
-                adapter = MangaInfoAdapter(chapterResultList, this@MangaInfoActivity)
                 recyclerView.adapter = adapter
-                firstItem = false
-            }
-//            else {
+
 //                (recyclerView.adapter as MangaInfoAdapter).addItems(chapterResultList)
-//            }
         })
 
 
@@ -141,24 +146,6 @@ class MangaInfoActivity : AppCompatActivity() {
             //TODO Исправить тип листа
             startActivity(intent)
         })
-
-//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                if (!recyclerView.canScrollVertically(1)) {
-//
-//                    lifecycleScope.launch {
-//                        val getMangaChapter = withContext(Dispatchers.IO) {
-//                            val chapterSizeList = (recyclerView.adapter as MangaInfoAdapter).itemCount
-//                            getMangaChapters(mangaId, chapterSizeList)
-//                        }
-//                        mangaChapterLD.postValue(getMangaChapter)
-//                    }
-//                    Toast.makeText(this@MangaInfoActivity, "ScrollEnd", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        })
-
 
 
         topAppBar.setNavigationOnClickListener {

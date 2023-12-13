@@ -13,7 +13,8 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -41,69 +42,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/ScrollView"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linerLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/linerLayout"
-            android:orientation="vertical"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/topImageView"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/berserkimage" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mangaTextTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent">
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Berserk"
+            android:textColor="@color/white_text"
+            android:textSize="@dimen/text_24sp" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/topImageView"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="40dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/berserkimage"
-                />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mangaTextDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Guts, known as the Black Swordsman, seeks sanctuary from the demonic forces attracted to him and his woman because of a demonic mark on their necks, and also vengeance against the man who branded him as an unholy sacrifice. Aided only by his titanic strength gained from a harsh childhood lived with mercenaries, a gigantic sword, and an iron prosthetic left hand, Guts must struggle against his bleak destiny, all the while fighting with a rage that might strip him of his humanity."
+            android:textColor="@color/white_text"
+            android:textSize="@dimen/text_16sp" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mangaTextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="Berserk"
-                android:textColor="@color/white_text"
-                android:textSize="@dimen/text_24sp"
-                 />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chapter_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mangaTextDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="Guts, known as the Black Swordsman, seeks sanctuary from the demonic forces attracted to him and his woman because of a demonic mark on their necks, and also vengeance against the man who branded him as an unholy sacrifice. Aided only by his titanic strength gained from a harsh childhood lived with mercenaries, a gigantic sword, and an iron prosthetic left hand, Guts must struggle against his bleak destiny, all the while fighting with a rage that might strip him of his humanity."
-                android:textColor="@color/white_text"
-                android:textSize="@dimen/text_16sp"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chapter_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    </androidx.core.widget.NestedScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/readButton"

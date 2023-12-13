@@ -1,6 +1,7 @@
 package com.example.mangalanguage
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,8 @@ class MangaInfoAdapter (
     private val chapterList: MutableList<MangaChapterResult>,
     private val mangaInfoActivity: MangaInfoActivity
 ): RecyclerView.Adapter<MangaInfoAdapter.ViewHolder>() {
+
+    var number = 1
 
     class ViewHolder(private val binding: ItemChapterBinding
     ) : RecyclerView.ViewHolder(binding.root){
@@ -27,23 +30,24 @@ class MangaInfoAdapter (
             chapterNumber.text = "Глава ${mangaItem.chapter}."
             chapterTitle.text = mangaItem.title
 
-            cardViewItem.setOnClickListener {
-                //TODO узнать, насколько такой подход вообще грамотен
-                activity.idChapterLD.postValue(mangaItem.id)
-            }
+//            cardViewItem.setOnClickListener {
+//                activity.idChapterLDResult.postValue(mangaItem.id)
+//            }
 
         }
 
     }
 
-    fun addItems(newItems: List<MangaChapterResult>) {
-        val startPosition = chapterList.size
-        chapterList.addAll(newItems)
-        //обновление вьюшки recyclerview
-        notifyItemRangeInserted(startPosition, newItems.size)
-    }
+//    fun addItems(newItems: List<MangaChapterResult>) {
+//        val startPosition = chapterList.size
+//        chapterList.addAll(newItems)
+//        //обновление вьюшки recyclerview
+//        notifyItemRangeInserted(startPosition, newItems.size)
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        Log.d("onCreateLog", "onCreateViewHolder $number")
+        number += 1
         val binding = ItemChapterBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false)
@@ -57,7 +61,5 @@ class MangaInfoAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chapterItem = chapterList[position]
         holder.bindItem(chapterItem, mangaInfoActivity)
-
     }
-
 }
