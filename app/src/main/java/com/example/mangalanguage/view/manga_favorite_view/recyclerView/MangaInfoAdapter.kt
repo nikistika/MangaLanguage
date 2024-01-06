@@ -1,13 +1,13 @@
-package com.example.mangalanguage
+package com.example.mangalanguage.view.manga_favorite_view.recyclerView
 
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mangalanguage.manga_favorite.MangaChapterResult
 import com.example.mangalanguage.databinding.ItemChapterBinding
-import com.example.mangalanguage.models.MangaDex.MangaChapterResult
-import com.example.mangalanguage.view.MangaInfoActivity
+import com.example.mangalanguage.view.manga_favorite_view.MangaInfoActivity
 
 class MangaInfoAdapter (
     private val chapterList: MutableList<MangaChapterResult>,

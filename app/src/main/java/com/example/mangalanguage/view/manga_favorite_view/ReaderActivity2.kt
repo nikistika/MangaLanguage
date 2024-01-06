@@ -1,4 +1,4 @@
-package com.example.mangalanguage.view
+package com.example.mangalanguage.view.manga_favorite_view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,16 +10,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.mangalanguage.R
-import com.example.mangalanguage.ReaderViewPagerAdapter
-import com.example.mangalanguage.VerticalViewPager
+import com.example.mangalanguage.manga_favorite.ReaderViewPagerAdapter
+import com.example.mangalanguage.manga_favorite.VerticalViewPager
 import com.example.mangalanguage.databinding.ActivityReader2Binding
 import com.example.mangalanguage.models.MangaDex.MangaImage.Chapter
 import com.example.mangalanguage.models.MangaDex.MangaImage.MangaImage
 import com.example.mangalanguage.network.MangaApiClient
 import com.example.mangalanguage.network.MangaDexApiService
+import com.example.mangalanguage.view.MainActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
+
 
 class ReaderActivity2 : AppCompatActivity() {
 
@@ -76,10 +78,6 @@ class ReaderActivity2 : AppCompatActivity() {
 
             })
 
-
-
-
-        val imageList: ArrayList<String> = ArrayList(2)
 
         mangaImageUrlLDResult.observe(this, Observer { imageUrl ->
             imageUrl?.let {

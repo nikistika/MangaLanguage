@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mangalanguage.FavoriteAdapter
+import com.example.mangalanguage.manga_favorite.FavoriteAdapter
 import com.example.mangalanguage.databinding.FragmentFavoriteBinding
 import com.example.mangalanguage.models.MangaDex.MangaData.MangaData
 import com.example.mangalanguage.models.MangaDex.MangaDataResult

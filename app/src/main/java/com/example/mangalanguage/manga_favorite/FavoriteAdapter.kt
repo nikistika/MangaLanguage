@@ -1,4 +1,4 @@
-package com.example.mangalanguage
+package com.example.mangalanguage.manga_favorite
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangalanguage.databinding.ItemFavoriteBinding
 import com.example.mangalanguage.models.MangaDex.MangaDataResult
-import com.example.mangalanguage.view.MangaInfoActivity
-import com.example.mangalanguage.view.main_fragments.FavoriteFragment
+import com.example.mangalanguage.view.manga_favorite_view.MangaInfoActivity
 import com.squareup.picasso.Picasso
 
 class FavoriteAdapter(

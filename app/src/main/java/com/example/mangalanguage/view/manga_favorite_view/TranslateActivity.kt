@@ -1,4 +1,4 @@
-package com.example.mangalanguage.view
+package com.example.mangalanguage.view.manga_favorite_view
 
 import android.app.Activity
 import android.content.Intent
@@ -18,7 +18,6 @@ import androidx.lifecycle.Observer
 import com.example.mangalanguage.databinding.ActivityTranslateBinding
 import com.example.mangalanguage.models.GoogleTranslate.TranslationRequest
 import com.example.mangalanguage.network.TranslateApiClient
-import com.example.mangalanguage.network.TranslateApiService
 import com.google.android.gms.vision.Frame
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer

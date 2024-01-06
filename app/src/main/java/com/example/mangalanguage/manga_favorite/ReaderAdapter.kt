@@ -1,10 +1,10 @@
-package com.example.mangalanguage
+package com.example.mangalanguage.manga_favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangalanguage.databinding.ItemReaderBinding
-import com.example.mangalanguage.view.ReaderActivity
+import com.example.mangalanguage.view.manga_favorite_view.ReaderActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 

@@ -1,4 +1,4 @@
-package com.example.mangalanguage
+package com.example.mangalanguage.manga_favorite
 
 import android.annotation.SuppressLint
 import android.content.Context

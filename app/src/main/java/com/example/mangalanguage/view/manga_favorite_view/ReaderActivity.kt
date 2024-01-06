@@ -1,4 +1,4 @@
-package com.example.mangalanguage.view
+package com.example.mangalanguage.view.manga_favorite_view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangalanguage.R
-import com.example.mangalanguage.ReaderAdapter
+import com.example.mangalanguage.manga_favorite.ReaderAdapter
 import com.example.mangalanguage.databinding.ActivityReaderBinding
+import com.example.mangalanguage.view.MainActivity
 import com.google.android.material.appbar.MaterialToolbar
 
 class ReaderActivity : AppCompatActivity() {

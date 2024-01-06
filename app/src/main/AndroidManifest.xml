@@ -27,10 +27,10 @@
         android:theme="@style/Base.Theme.MangaLanguage"
         tools:targetApi="31">
         <activity
-            android:name=".view.ReaderActivity2"
+            android:name=".view.manga_favorite_view.ReaderActivity2"
             android:exported="false" />
         <activity
-            android:name=".view.MangaInfoActivity"
+            android:name=".view.manga_favorite_view.MangaInfoActivity"
             android:exported="false" />
         <activity
             android:name=".view.main_fragments.SettingFragment"
@@ -47,13 +47,13 @@
             android:label="@string/title_activity_favorite_fragment"
             android:theme="@style/Base.Theme.MangaLanguage" />
         <activity
-            android:name=".view.ReaderActivity"
+            android:name=".view.manga_favorite_view.ReaderActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TranslateActivity"
+            android:name=".view.manga_favorite_view.TranslateActivity"
             android:exported="false" />
         <activity
-            android:name=".ReaderAdapter"
+            android:name=".manga_favorite.ReaderAdapter"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"

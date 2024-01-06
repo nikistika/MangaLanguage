@@ -1,14 +1,14 @@
-package com.example.mangalanguage
+package com.example.mangalanguage.manga_favorite
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
-import com.example.mangalanguage.view.ReaderActivity2
+import com.example.mangalanguage.R
+import com.example.mangalanguage.view.manga_favorite_view.ReaderActivity2
 import com.squareup.picasso.Picasso
 import java.util.*
 
