@@ -8,7 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mangalanguage.databinding.FragmentCardBinding
 import com.example.mangalanguage.databinding.FragmentSettingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Фрагмент, на котором происходит изучение слов с помощью карточек
+ */
+
+@AndroidEntryPoint
 class CardFragment : Fragment() {
     private var _binding: FragmentCardBinding?= null
     private val binding get() = _binding

@@ -1,4 +1,4 @@
-package com.example.mangalanguage.view.manga_favorite_view
+package com.example.mangalanguage.view.manga_activity
 
 import android.app.Activity
 import android.content.Intent
@@ -25,6 +25,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -32,6 +33,11 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 
+/**
+ * Активити, предоставляющее перевод текста выделеного фрагмента манги
+ */
+
+@AndroidEntryPoint
 class TranslateActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityTranslateBinding

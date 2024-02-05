@@ -1,21 +1,41 @@
-package com.example.mangalanguage.manga_favorite
+package com.example.mangalanguage.adapters.manga_search_adapters
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.example.mangalanguage.R
-import com.example.mangalanguage.view.manga_favorite_view.ReaderActivity2
+import com.example.mangalanguage.interfaces.SendUrlImage
+import com.github.chrisbanes.photoview.PhotoView
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class ReaderViewPagerAdapter(
-    private val activity: ReaderActivity2,
+/**
+ * Адаптер ридера манги, который работает на основе ViewPager
+ */
+
+class ReaderAdapterVP(
+    private val context: Context,
     private val imageList: List<String>,
-    private val mangaId: String) : PagerAdapter() {
+    private val mangaId: String,
+    private val sendUrlImage: SendUrlImage
+) : PagerAdapter(), ViewPager.OnPageChangeListener {
+
+    private var currentPosition: Int = 0
+
+    init {
+        if (context is Activity) {
+            // Установка слушателя изменения страницы для ViewPager
+            (context.findViewById<ViewPager>(R.id.viewPager)).addOnPageChangeListener(this)
+        } else {
+            // Обработка ситуации, когда context не является экземпляром Activity
+            // Можно выкинуть исключение или выполнить другие действия по вашему усмотрению
+        }
+    }
 
     // getCount для возврата размера списка.
     override fun getCount(): Int {
@@ -33,7 +53,7 @@ class ReaderViewPagerAdapter(
         // в следующем методе мы инициализируем
         // нашу службу макета.
         val mLayoutInflater =
-            activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         // в следующем методе мы надуваем нашу настраиваемую
         // файл макета, который мы создали.
@@ -42,17 +62,16 @@ class ReaderViewPagerAdapter(
 
         // в следующем методе мы инициализируем
         // наше изображение с помощью идентификатора.
-        val imageView: ImageView = itemView.findViewById<View>(R.id.idIVImage) as ImageView
+        val photoView: PhotoView = itemView.findViewById<View>(R.id.idIVImage) as PhotoView
 
         // в следующем методе мы устанавливаем
         // ресурс изображения для изображения.
 
         val imageUrl = "https://uploads.mangadex.org/data-saver/${mangaId}/${imageList[position]}"
-        activity.mangaImageUrlLD.postValue(imageUrl)
 
         Picasso.get()
             .load(imageUrl)
-            .into(imageView)
+            .into(photoView)
 
         // в следующем методе мы добавляем этот
         // элемент представления к контейнеру.
@@ -69,5 +88,22 @@ class ReaderViewPagerAdapter(
         container.removeView(`object` as RelativeLayout)
     }
 
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        val skr = 100 //Заглушка
+        //TODO сделать что-нибудь с этими заглушками
+    }
+
+    //Метод, предоставляющий доступ к текущему изображению на экране
+    override fun onPageSelected(position: Int) {
+        currentPosition = position
+
+        // Получение URL текущей картинки
+        val imageUrl = "https://uploads.mangadex.org/data-saver/${mangaId}/${imageList[currentPosition]}"
+        sendUrlImage.sendUrlImage(imageUrl)
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+        val skr = 100 //Заглушка
+    }
 }
 

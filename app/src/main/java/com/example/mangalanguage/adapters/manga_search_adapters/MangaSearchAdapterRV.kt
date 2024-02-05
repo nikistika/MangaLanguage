@@ -1,4 +1,4 @@
-package com.example.mangalanguage.manga_favorite
+package com.example.mangalanguage.adapters.manga_search_adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,13 +7,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangalanguage.databinding.ItemFavoriteBinding
 import com.example.mangalanguage.models.MangaDex.MangaDataResult
-import com.example.mangalanguage.view.manga_favorite_view.MangaInfoActivity
+import com.example.mangalanguage.view.manga_activity.MangaInfoActivity
 import com.squareup.picasso.Picasso
 
-class FavoriteAdapter(
+/**
+ * Адаптер RecyclerView, отвечающий за работу MangaSearchFragment
+ */
+
+class MangaSearchAdapterRV(
     private val mangaList: List<MangaDataResult?>,
 ) :
-    RecyclerView.Adapter<FavoriteAdapter.ViewHolder>(){
+    RecyclerView.Adapter<MangaSearchAdapterRV.ViewHolder>(){
 
     class ViewHolder(private val binding: ItemFavoriteBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -37,6 +41,7 @@ class FavoriteAdapter(
             Picasso.get()
                 .load(imageUrl)
                 .into(mangaCover)
+
 
             mangaTitleView.text = mangaTitle
             mangaYearView.text = mangaYear

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".view.manga_favorite_view.ReaderActivity2">
+    tools:context=".view.manga_activity.ReaderActivityVP">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -29,7 +29,7 @@
             app:title="ReaderActivity"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.example.mangalanguage.manga_favorite.VerticalViewPager
+    <com.example.mangalanguage.adapters.manga_search_adapters.VerticalViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

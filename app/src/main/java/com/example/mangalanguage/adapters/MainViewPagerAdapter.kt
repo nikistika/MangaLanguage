@@ -1,8 +1,12 @@
-package com.example.mangalanguage
+package com.example.mangalanguage.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+
+/**
+ * ViewPagerAdapter, определябщий работу ViewPager в MainActivity
+ */
 
 class MainViewPagerAdapter (
     fragmentActivity: FragmentActivity,

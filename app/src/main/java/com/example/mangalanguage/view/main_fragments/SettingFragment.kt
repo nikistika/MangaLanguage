@@ -7,7 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mangalanguage.databinding.FragmentFavoriteBinding
 import com.example.mangalanguage.databinding.FragmentSettingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Фрагмент, отвечающий за настройки приложения
+ */
+
+@AndroidEntryPoint
 class SettingFragment : Fragment() {
 
     private var _binding: FragmentSettingBinding? = null

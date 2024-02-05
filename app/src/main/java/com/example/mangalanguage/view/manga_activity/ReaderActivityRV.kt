@@ -1,4 +1,4 @@
-package com.example.mangalanguage.view.manga_favorite_view
+package com.example.mangalanguage.view.manga_activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,17 +9,23 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangalanguage.R
-import com.example.mangalanguage.manga_favorite.ReaderAdapter
+import com.example.mangalanguage.adapters.manga_search_adapters.ReaderAdapterRV
 import com.example.mangalanguage.databinding.ActivityReaderBinding
 import com.example.mangalanguage.view.MainActivity
 import com.google.android.material.appbar.MaterialToolbar
+import dagger.hilt.android.AndroidEntryPoint
 
-class ReaderActivity : AppCompatActivity() {
+/**
+ * Ридер манги, который работает на основе RecyclerView
+ */
+
+@AndroidEntryPoint
+class ReaderActivityRV : AppCompatActivity() {
 
     lateinit var binding: ActivityReaderBinding
 
     lateinit var recyclerView: RecyclerView
-    lateinit var adapter: ReaderAdapter
+    lateinit var adapter: ReaderAdapterRV
     lateinit var readerList: List<String>
     lateinit var topAppBar: MaterialToolbar
 
@@ -46,7 +52,7 @@ class ReaderActivity : AppCompatActivity() {
             "https://www.mangaread.org/wp-content/uploads/WP-manga/data/manga_613a60983ceb0/a7efb9dbb3458d5be047f8f582815380/23.jpeg"
         )
 
-        adapter = ReaderAdapter(this, readerList)
+        adapter = ReaderAdapterRV(this, readerList)
         recyclerView.adapter = adapter
 
 
@@ -64,6 +70,7 @@ class ReaderActivity : AppCompatActivity() {
             finish()
             Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show()
        }
+
 
         topAppBar.setOnMenuItemClickListener { menuItem ->
             //TODO поработать с intent, вроде при таком подходе происходят потери памяти.

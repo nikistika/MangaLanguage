@@ -5,7 +5,7 @@
     android:background="@color/silver_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.manga_favorite_view.TranslateActivity">
+    tools:context=".view.manga_activity.TranslateActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"

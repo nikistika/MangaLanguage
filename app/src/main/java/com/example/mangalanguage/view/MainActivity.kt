@@ -4,15 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mangalanguage.R
-import com.example.mangalanguage.MainViewPagerAdapter
+import com.example.mangalanguage.adapters.MainViewPagerAdapter
 import com.example.mangalanguage.databinding.ActivityMainBinding
 import com.example.mangalanguage.view.main_fragments.CardFragment
-import com.example.mangalanguage.view.main_fragments.FavoriteFragment
+import com.example.mangalanguage.view.main_fragments.MangaFragment
 import com.example.mangalanguage.view.main_fragments.SettingFragment
 import com.example.mangalanguage.view.main_fragments.WordsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
@@ -51,12 +53,14 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+
     }
 
 
     private fun prepapeViewPager() {
         val fragmentList = arrayListOf(
-            FavoriteFragment.newInstance(),
+            MangaFragment.newInstance(),
             CardFragment.newInstance(),
             WordsFragment.newInstance(),
             SettingFragment.newInstance()

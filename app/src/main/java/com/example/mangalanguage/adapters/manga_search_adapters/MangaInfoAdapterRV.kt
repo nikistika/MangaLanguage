@@ -1,21 +1,24 @@
-package com.example.mangalanguage.view.manga_favorite_view.recyclerView
+package com.example.mangalanguage.adapters.manga_search_adapters
 
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mangalanguage.manga_favorite.manga_info.GoToReader
-import com.example.mangalanguage.manga_favorite.ListItem
-import com.example.mangalanguage.manga_favorite.MangaChapterResult
-import com.example.mangalanguage.manga_favorite.MangaInfo
 import com.example.mangalanguage.R
-import com.example.mangalanguage.manga_favorite.UpdateListInfo
+import com.example.mangalanguage.interfaces.GoToReader
+import com.example.mangalanguage.models.MangaDex.ListItem
+import com.example.mangalanguage.models.MangaDex.MangaChapterResult
+import com.example.mangalanguage.models.MangaDex.MangaInfo
 import com.example.mangalanguage.databinding.ItemChapterBinding
 import com.example.mangalanguage.databinding.ItemInfoBinding
 import com.squareup.picasso.Picasso
 
-class MangaInfoAdapter2(
+/**
+ * Адаптер RecyclerView для активити MangaInfoActivity
+ */
+
+class MangaInfoAdapterRV(
     private var items: List<ListItem>,
     private val goToReaderListener: GoToReader
     ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -59,12 +62,10 @@ class MangaInfoAdapter2(
             itemView.setOnClickListener {
                 Log.d("MyLog", "setOnClickListener: $chapterId")
                 goToReaderListener.goToReader(chapterId)
-
             }
-
         }
-
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

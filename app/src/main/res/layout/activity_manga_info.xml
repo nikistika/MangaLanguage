@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/silver_background"
-    tools:context=".view.manga_favorite_view.MangaInfoActivity">
+    tools:context=".view.manga_activity.MangaInfoActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"

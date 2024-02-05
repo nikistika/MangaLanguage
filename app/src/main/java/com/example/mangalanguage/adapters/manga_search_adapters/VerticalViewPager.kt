@@ -1,4 +1,4 @@
-package com.example.mangalanguage.manga_favorite
+package com.example.mangalanguage.adapters.manga_search_adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,6 +6,10 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+
+/**
+ * Класс, переопределящий работу ViewPager в ReaderActivityVP
+ */
 
 class VerticalViewPager (context: Context, attrs: AttributeSet) : ViewPager(context, attrs) {
     init {

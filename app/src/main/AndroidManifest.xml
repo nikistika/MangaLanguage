@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".di.HiltApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -26,11 +27,12 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.MangaLanguage"
         tools:targetApi="31">
+
         <activity
-            android:name=".view.manga_favorite_view.ReaderActivity2"
+            android:name=".view.manga_activity.ReaderActivityVP"
             android:exported="false" />
         <activity
-            android:name=".view.manga_favorite_view.MangaInfoActivity"
+            android:name=".view.manga_activity.MangaInfoActivity"
             android:exported="false" />
         <activity
             android:name=".view.main_fragments.SettingFragment"
@@ -42,18 +44,18 @@
             android:name=".view.main_fragments.CardFragment"
             android:exported="false" />
         <activity
-            android:name=".view.main_fragments.FavoriteFragment"
+            android:name=".view.main_fragments.MangaFragment"
             android:exported="false"
             android:label="@string/title_activity_favorite_fragment"
             android:theme="@style/Base.Theme.MangaLanguage" />
         <activity
-            android:name=".view.manga_favorite_view.ReaderActivity"
+            android:name=".view.manga_activity.ReaderActivityRV"
             android:exported="false" />
         <activity
-            android:name=".view.manga_favorite_view.TranslateActivity"
+            android:name=".view.manga_activity.TranslateActivity"
             android:exported="false" />
         <activity
-            android:name=".manga_favorite.ReaderAdapter"
+            android:name=".adapters.manga_search_adapters.ReaderAdapterRV"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"

@@ -1,46 +1,50 @@
-package com.example.mangalanguage.view.manga_favorite_view
+package com.example.mangalanguage.view.manga_activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.mangalanguage.R
-import com.example.mangalanguage.manga_favorite.ReaderViewPagerAdapter
-import com.example.mangalanguage.manga_favorite.VerticalViewPager
+import com.example.mangalanguage.adapters.manga_search_adapters.ReaderAdapterVP
+import com.example.mangalanguage.adapters.manga_search_adapters.VerticalViewPager
 import com.example.mangalanguage.databinding.ActivityReader2Binding
-import com.example.mangalanguage.models.MangaDex.MangaImage.Chapter
-import com.example.mangalanguage.models.MangaDex.MangaImage.MangaImage
+import com.example.mangalanguage.interfaces.SendUrlImage
 import com.example.mangalanguage.network.MangaApiClient
 import com.example.mangalanguage.network.MangaDexApiService
 import com.example.mangalanguage.view.MainActivity
+import com.example.mangalanguage.viewModel.ReaderVPViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+/**
+ * Ридер манги, который работает на основе ViewPager
+ */
 
-class ReaderActivity2 : AppCompatActivity() {
+@AndroidEntryPoint
+class ReaderActivityVP : AppCompatActivity(), SendUrlImage {
+
+    private val viewModel: ReaderVPViewModel by viewModels()
 
     lateinit var topAppBar: MaterialToolbar
     lateinit var viewPager: VerticalViewPager
-    lateinit var viewPagerAdapter: ReaderViewPagerAdapter
+    lateinit var viewPagerAdapter: ReaderAdapterVP
     lateinit var fabTranslate: FloatingActionButton
-
-
 
     private lateinit var mangadexApi: MangaDexApiService
 
     lateinit var binding: ActivityReader2Binding
 
-    val mangaImageLD: MutableLiveData<MangaImage> = MutableLiveData()
-    val mangaImageLDResult: LiveData<MangaImage> = mangaImageLD
+    val mangaImageUrl: MutableLiveData<String?> = MutableLiveData()
+    val mangaImageUrlResult: LiveData<String?> = mangaImageUrl
 
-    val mangaImageUrlLD: MutableLiveData<String?> = MutableLiveData()
-    val mangaImageUrlLDResult: LiveData<String?> = mangaImageUrlLD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,13 +62,12 @@ class ReaderActivity2 : AppCompatActivity() {
         Log.d("MyLog", "idChapter: $idChapter")
 
         lifecycleScope.launch {
-            val getMangaImage = getMangaImage(idChapter)
-            mangaImageLD.postValue(getMangaImage)
+            viewModel.getMangaImages(idChapter)
         }
 
 
 
-        mangaImageLDResult.observe(this, Observer {
+        viewModel.mangaImageResult.observe(this, Observer {
 
             Log.d("MyLog", "getMangaImage: $it")
 
@@ -73,13 +76,13 @@ class ReaderActivity2 : AppCompatActivity() {
 
 
 
-            viewPagerAdapter = ReaderViewPagerAdapter(this, mangaImageList, mangaId)
+            viewPagerAdapter = ReaderAdapterVP(this, mangaImageList, mangaId, this)
             viewPager.adapter = viewPagerAdapter
 
             })
 
 
-        mangaImageUrlLDResult.observe(this, Observer { imageUrl ->
+        mangaImageUrlResult.observe(this, Observer { imageUrl ->
             imageUrl?.let {
 
                 fabTranslate.setOnClickListener {
@@ -90,7 +93,6 @@ class ReaderActivity2 : AppCompatActivity() {
                 }
             }
         })
-
 
 
         topAppBar.setNavigationOnClickListener {
@@ -111,25 +113,9 @@ class ReaderActivity2 : AppCompatActivity() {
                 }
             }
         }
-
     }
 
-    suspend fun getMangaImage (idChapter: String?): MangaImage{
-        val response = mangadexApi.getMangaImage(idChapter)
-        if (response.isSuccessful){
-            val mangaImageResult = response.body()
-            if (mangaImageResult != null){
-                return MangaImage(
-                    baseUrl = mangaImageResult.baseUrl,
-                    chapter = mangaImageResult.chapter,
-                    result = mangaImageResult.result
-                )
-            }
-        }
-        return MangaImage(
-            baseUrl = "",
-            chapter = Chapter(emptyList(),emptyList(),""),
-            result = ""
-        )
+    override fun sendUrlImage(imageUrl: String) {
+        mangaImageUrl.postValue(imageUrl)
     }
 }

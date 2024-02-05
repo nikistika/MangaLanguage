@@ -7,7 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mangalanguage.databinding.FragmentSettingBinding
 import com.example.mangalanguage.databinding.FragmentWordsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Фрагмент, который отвечает за работу словаря
+ */
+
+@AndroidEntryPoint
 class WordsFragment : Fragment() {
 
     private var _binding: FragmentWordsBinding? = null

@@ -1,28 +1,33 @@
-package com.example.mangalanguage.manga_favorite
+package com.example.mangalanguage.adapters.manga_search_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangalanguage.databinding.ItemReaderBinding
-import com.example.mangalanguage.view.manga_favorite_view.ReaderActivity
+import com.example.mangalanguage.view.manga_activity.ReaderActivityRV
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
-class ReaderAdapter(private val activity: ReaderActivity, private val readerImageList: List<String>) :
-    RecyclerView.Adapter<ReaderAdapter.ViewHolder>() {
+/**
+ * Адаптер ридера манги, который работает на основе RecyclerView
+ */
+
+class ReaderAdapterRV(private val activity: ReaderActivityRV, private val readerImageList: List<String>) :
+    RecyclerView.Adapter<ReaderAdapterRV.ViewHolder>() {
 
     //TODO С помощью gpt улучшить код, подправить параметры
 
     class ViewHolder(private val binding: ItemReaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindItem(activity: ReaderActivity, reader: String) {
+        fun bindItem(activity: ReaderActivityRV, reader: String) {
 
             val fab: FloatingActionButton = binding.itemReaderFloatingButton
             val imageView = binding.imageView
 
             fab.setOnClickListener {
                 activity.ImageUrl.postValue(reader)
+                //TODO сделать связь через интерфейс
             }
 
             Picasso.get()
