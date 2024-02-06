@@ -13,15 +13,21 @@ import javax.inject.Inject
 @HiltViewModel
 class ReaderVPViewModel @Inject constructor(
     private val mangaDexRepository: MangaDexRepository,
-    private val sendUrlImage: SendUrlImage
 ): ViewModel() {
 
     private val mangaImage: MutableLiveData<MangaImage> = MutableLiveData()
     val mangaImageResult: LiveData<MangaImage> = mangaImage
 
+    private val mangaImageUrl: MutableLiveData<String?> = MutableLiveData()
+    val mangaImageUrlResult: LiveData<String?> = mangaImageUrl
+
 
     suspend fun getMangaImages (idChapter: String?) {
         val mangaImages = mangaDexRepository.getMangaImages(idChapter)
         mangaImage.postValue(mangaImages)
+    }
+
+    fun sendUrlImage(imageUrl: String) {
+        mangaImageUrl.postValue(imageUrl)
     }
 }

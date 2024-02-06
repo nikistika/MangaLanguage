@@ -4,7 +4,6 @@ import com.example.mangalanguage.models.MangaDex.MangaChapters.MangaChapter
 import com.example.mangalanguage.models.MangaDex.MangaData.MangaData
 import com.example.mangalanguage.models.MangaDex.MangaImage.Chapter
 import com.example.mangalanguage.models.MangaDex.MangaImage.MangaImage
-import com.example.mangalanguage.network.MangaApiClient
 import com.example.mangalanguage.network.MangaDexApiService
 import javax.inject.Inject
 

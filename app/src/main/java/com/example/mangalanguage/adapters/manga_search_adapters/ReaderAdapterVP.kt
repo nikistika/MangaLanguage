@@ -10,6 +10,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.mangalanguage.R
 import com.example.mangalanguage.interfaces.SendUrlImage
+import com.example.mangalanguage.viewModel.ReaderVPViewModel
 import com.github.chrisbanes.photoview.PhotoView
 import com.squareup.picasso.Picasso
 import java.util.*
@@ -22,7 +23,7 @@ class ReaderAdapterVP(
     private val context: Context,
     private val imageList: List<String>,
     private val mangaId: String,
-    private val sendUrlImage: SendUrlImage
+    private val readerVPViewModel: ReaderVPViewModel
 ) : PagerAdapter(), ViewPager.OnPageChangeListener {
 
     private var currentPosition: Int = 0
@@ -99,7 +100,7 @@ class ReaderAdapterVP(
 
         // Получение URL текущей картинки
         val imageUrl = "https://uploads.mangadex.org/data-saver/${mangaId}/${imageList[currentPosition]}"
-        sendUrlImage.sendUrlImage(imageUrl)
+        readerVPViewModel.sendUrlImage(imageUrl)
     }
 
     override fun onPageScrollStateChanged(state: Int) {

@@ -23,7 +23,7 @@ interface MangaDexApiService {
         @Query("offset") offset: Int,
         @Query("translatedLanguage[]") translatedLanguage: String = "en",
         @Query("order[chapter]") order: String = "asc",
-        @Query("limit") limit: Int = 100,
+        @Query("limit") limit: Int = 100
     ): Response<MangaChapter>
 
     @GET("at-home/server/{chapterId}")

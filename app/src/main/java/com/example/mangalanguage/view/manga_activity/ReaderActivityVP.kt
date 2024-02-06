@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
  */
 
 @AndroidEntryPoint
-class ReaderActivityVP : AppCompatActivity(), SendUrlImage {
+class ReaderActivityVP : AppCompatActivity() {
 
     private val viewModel: ReaderVPViewModel by viewModels()
 
@@ -41,10 +41,6 @@ class ReaderActivityVP : AppCompatActivity(), SendUrlImage {
     private lateinit var mangadexApi: MangaDexApiService
 
     lateinit var binding: ActivityReader2Binding
-
-    val mangaImageUrl: MutableLiveData<String?> = MutableLiveData()
-    val mangaImageUrlResult: LiveData<String?> = mangaImageUrl
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +61,6 @@ class ReaderActivityVP : AppCompatActivity(), SendUrlImage {
             viewModel.getMangaImages(idChapter)
         }
 
-
-
         viewModel.mangaImageResult.observe(this, Observer {
 
             Log.d("MyLog", "getMangaImage: $it")
@@ -76,13 +70,13 @@ class ReaderActivityVP : AppCompatActivity(), SendUrlImage {
 
 
 
-            viewPagerAdapter = ReaderAdapterVP(this, mangaImageList, mangaId, this)
+            viewPagerAdapter = ReaderAdapterVP(this, mangaImageList, mangaId, viewModel)
             viewPager.adapter = viewPagerAdapter
 
             })
 
 
-        mangaImageUrlResult.observe(this, Observer { imageUrl ->
+        viewModel.mangaImageUrlResult.observe(this, Observer { imageUrl ->
             imageUrl?.let {
 
                 fabTranslate.setOnClickListener {
@@ -113,9 +107,5 @@ class ReaderActivityVP : AppCompatActivity(), SendUrlImage {
                 }
             }
         }
-    }
-
-    override fun sendUrlImage(imageUrl: String) {
-        mangaImageUrl.postValue(imageUrl)
     }
 }

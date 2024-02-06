@@ -190,7 +190,7 @@ class MangaInfoActivity : AppCompatActivity(), GoToReader {
         startActivity(intent)
     }
 
-    fun updateList(newItems: List<ListItem>) {
+    private fun updateList(newItems: List<ListItem>) {
         adapter.updateList(newItems)
     }
 }

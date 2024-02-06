@@ -1,5 +1,5 @@
 package com.example.mangalanguage.models.GoogleTranslate
 
-data class TranslationResponse(
+data class TranslationResult(
     val data: Translations
 )

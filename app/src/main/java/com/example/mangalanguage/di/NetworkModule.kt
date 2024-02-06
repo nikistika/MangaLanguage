@@ -2,8 +2,12 @@ package com.example.mangalanguage.di
 
 import com.example.mangalanguage.network.MangaApiClient
 import com.example.mangalanguage.network.MangaDexApiService
+import com.example.mangalanguage.network.TranslateApiClient
+import com.example.mangalanguage.network.TranslateApiService
 import com.example.mangalanguage.repository.MangaDexRepository
 import com.example.mangalanguage.repository.MangaDexRepositoryImpl
+import com.example.mangalanguage.repository.TranslateRepository
+import com.example.mangalanguage.repository.TranslateRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,9 +22,17 @@ class NetworkModule {
         return MangaDexRepositoryImpl(mangaDexApi)
     }
 
+    fun provideTranslateRepository(translateApi: TranslateApiService): TranslateRepository {
+        return TranslateRepositoryImpl(translateApi)
+    }
+
     @Provides
     fun provideMangaDexApi(): MangaDexApiService {
         return MangaApiClient.getInstance().create(MangaDexApiService::class.java)
+    }
+
+    fun provideTranslateApi(): TranslateApiService {
+        return TranslateApiClient.getInstance().create(TranslateApiService::class.java)
     }
 
 }

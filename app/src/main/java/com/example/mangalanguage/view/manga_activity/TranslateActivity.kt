@@ -48,7 +48,7 @@ class TranslateActivity : AppCompatActivity() {
     lateinit var text: String
 
 
-    val translate: MutableLiveData<String> = MutableLiveData()
+    private val translate: MutableLiveData<String> = MutableLiveData()
     val translateResult: LiveData<String> = translate
 
     @OptIn(DelicateCoroutinesApi::class)
