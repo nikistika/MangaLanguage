@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">MangaLanguage</string>
+    <string name="app_name">MangaWord</string>
     <string name="app_name2">Manga Language</string>
     <string name="manga_search">Найти мангу</string>
-    <string name="library_manga">Библиотека</string>
+    <string name="search">Поиск</string>
+
+    <string name="manga">Манга</string>
     <string name="title_activity_favorite_fragment">FavoriteFragment</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

@@ -3,15 +3,8 @@
     <style name="Base.Theme.MangaLanguage" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textColorHint">@color/white_tint</item>
+        <item name="android:editTextColor">@color/white_text</item>
     </style>
-
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="MyTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="android:textColorHint">@color/silver_background</item>
-    </style>
-
 
 </resources>

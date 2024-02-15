@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mangalanguage.databinding.ItemFavoriteBinding
+import com.example.mangalanguage.databinding.ItemMangaBinding
 import com.example.mangalanguage.models.MangaDex.MangaDataResult
 import com.example.mangalanguage.view.manga_activity.MangaInfoActivity
 import com.squareup.picasso.Picasso
@@ -18,8 +18,7 @@ class MangaSearchAdapterRV(
     private val mangaList: List<MangaDataResult?>,
 ) :
     RecyclerView.Adapter<MangaSearchAdapterRV.ViewHolder>(){
-
-    class ViewHolder(private val binding: ItemFavoriteBinding,
+    class ViewHolder(private val binding: ItemMangaBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindItem(mangaList: MangaDataResult?) {
@@ -40,7 +39,10 @@ class MangaSearchAdapterRV(
             // Используем Picasso для загрузки и отображения изображения
             Picasso.get()
                 .load(imageUrl)
+                .resize(130,176)
+                .centerInside()
                 .into(mangaCover)
+
 
 
             mangaTitleView.text = mangaTitle
@@ -64,7 +66,7 @@ class MangaSearchAdapterRV(
     }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val binding = ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context),
+            val binding = ItemMangaBinding.inflate(LayoutInflater.from(parent.context),
                 parent, false)
             return ViewHolder(binding)
     }

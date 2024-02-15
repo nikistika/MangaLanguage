@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.SparseArray
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +19,8 @@ import androidx.lifecycle.Observer
 import com.example.mangalanguage.databinding.ActivityTranslateBinding
 import com.example.mangalanguage.models.GoogleTranslate.TranslationRequest
 import com.example.mangalanguage.network.TranslateApiClient
+import com.example.mangalanguage.network.TranslateApiService
+import com.example.mangalanguage.viewModel.TranslateViewModel
 import com.google.android.gms.vision.Frame
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
@@ -32,26 +35,24 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
+import javax.inject.Inject
 
 /**
  * Активити, предоставляющее перевод текста выделеного фрагмента манги
  */
 
 @AndroidEntryPoint
-class TranslateActivity : AppCompatActivity() {
+class TranslateActivity: AppCompatActivity() {
 
     lateinit var binding: ActivityTranslateBinding
     lateinit var textEng: TextView
     lateinit var textRu: TextView
     lateinit var topAppBar: MaterialToolbar
 
+    private val viewModel: TranslateViewModel by viewModels()
+
     lateinit var text: String
 
-
-    private val translate: MutableLiveData<String> = MutableLiveData()
-    val translateResult: LiveData<String> = translate
-
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTranslateBinding.inflate(layoutInflater)
@@ -61,34 +62,10 @@ class TranslateActivity : AppCompatActivity() {
         textEng = binding.textEng
         textRu = binding.textRu
 
-        val apiService = TranslateApiClient.create()
-
-        translateResult.observe(this, Observer {
-        //Переводчик
-        val translationRequest = TranslationRequest(
-            query = it,
-            sourceLanguage = "en",
-            targetLanguage = "ru",
-            apiKey = "AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw"
-        )
-
-        GlobalScope.launch(Dispatchers.Main) {
-            try {
-                val response  = apiService.translate(
-                    query = translationRequest.query,
-                    sourceLanguage = translationRequest.sourceLanguage,
-                    targetLanguage = translationRequest.targetLanguage,
-                    apiKey = translationRequest.apiKey
-                )
-
-                val translatedText = response.data.translations.first().translatedText
-// Используйте полученный перевод (translatedText)
-                textRu.text = translatedText
-            } catch (e: Exception) {
-// Обработка ошибки
-            }
-        }
+        viewModel.translateResult.observe(this, Observer {
+            textRu.text = it
         })
+
 
         topAppBar.setNavigationOnClickListener {
             finish()
@@ -97,7 +74,10 @@ class TranslateActivity : AppCompatActivity() {
 
         val imageUrl = intent.getStringExtra("message_key")
         if (imageUrl != null) {
-        Picasso.get().load(imageUrl).into(object : com.squareup.picasso.Target {
+        Picasso
+            .get()
+            .load(imageUrl)
+            .into(object : com.squareup.picasso.Target {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                 // Отображаем загруженное изображение в ImageView
                 // imageView.setImageBitmap(bitmap)
@@ -144,9 +124,9 @@ class TranslateActivity : AppCompatActivity() {
             // В случае ошибки при обрезке изображения выводим Toast
             Toast.makeText(this, "Error cropping image", Toast.LENGTH_SHORT).show()
         }
-
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun recognizeTextFromImage(imageUri: Uri) {
         // Создаем объект TextRecognizer для распознавания текста
         val textRecognizer = TextRecognizer.Builder(this).build()
@@ -181,7 +161,11 @@ class TranslateActivity : AppCompatActivity() {
                 // Делаем что-то с распознанным текстом, например, выводим его в TextView
                 textEng.text = text
 
-                translate.postValue(text)
+//                translate.postValue(text)
+
+                GlobalScope.launch {
+                    viewModel.translateEnRu(text)
+                }
             }
         }
     }

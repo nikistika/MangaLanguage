@@ -11,9 +11,19 @@
     <color name="black_text">#1C1B1F</color>
 
 
-    <color name="white_text">#FFFFFF</color>
+<!--    Новый дизайн-->
 
+    <color name="background">#1C1C1C</color>
+    <color name="background_reader">#0A0A0A</color>
+    <color name="widget">#4D4D4D</color>
+    <color name="smile">#4D4D4D</color>
+    <color name="white_text">#FFFFFFFF</color>
+    <color name="smile_white">#FFFFFFFF</color>
+    <color name="white_tint">#ACA9A9</color>
 
-
+    <color name="светло_жёлтый">#FFEA78</color>
+    <color name="светло_красный">#FFA07A</color>
+    <color name="голубой">#87CEEB</color>
+    <color name="салатовый">#63FAC0</color>
 
 </resources>

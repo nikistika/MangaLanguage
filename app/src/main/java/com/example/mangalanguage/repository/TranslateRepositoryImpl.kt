@@ -9,20 +9,19 @@ class TranslateRepositoryImpl @Inject constructor(
     private val translateApiService: TranslateApiService
 ): TranslateRepository {
 
-    override suspend fun translateEnRu(textEn: String): TranslationResult {
+    override suspend fun translateEnRu(textEn: String): String {
         val response = translateApiService.translateEnRu(textEn)
 
-        if (response.isSuccessful){
-
+        if (response.isSuccessful) {
             val translateDataResult = response.body()
-            if (translateDataResult != null){
-                return TranslationResult(
-                    data = Translations(translations = translateDataResult.data.translations)
-                )
+            if (translateDataResult != null) {
+                val translations = translateDataResult.data.translations
+                // Преобразование списка переводов в список строк
+                val translatedTextList = translations.map { it.translatedText }
+                // Преобразование списка строк в одну строку, разделенную переносами строки
+                return translatedTextList.joinToString(separator = "\n")
             }
         }
-        return TranslationResult(
-            data = Translations(translations = emptyList())
-        )
+        return ""
     }
 }

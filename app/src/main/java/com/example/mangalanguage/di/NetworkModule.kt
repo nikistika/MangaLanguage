@@ -8,6 +8,7 @@ import com.example.mangalanguage.repository.MangaDexRepository
 import com.example.mangalanguage.repository.MangaDexRepositoryImpl
 import com.example.mangalanguage.repository.TranslateRepository
 import com.example.mangalanguage.repository.TranslateRepositoryImpl
+import com.example.mangalanguage.view.manga_activity.TranslateActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +23,7 @@ class NetworkModule {
         return MangaDexRepositoryImpl(mangaDexApi)
     }
 
+    @Provides
     fun provideTranslateRepository(translateApi: TranslateApiService): TranslateRepository {
         return TranslateRepositoryImpl(translateApi)
     }
@@ -31,6 +33,7 @@ class NetworkModule {
         return MangaApiClient.getInstance().create(MangaDexApiService::class.java)
     }
 
+    @Provides
     fun provideTranslateApi(): TranslateApiService {
         return TranslateApiClient.getInstance().create(TranslateApiService::class.java)
     }

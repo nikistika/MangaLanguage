@@ -2,10 +2,12 @@ package com.example.mangalanguage.view.main_fragments
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,6 +22,7 @@ import com.example.mangalanguage.models.MangaDex.MangaDataResult
 import com.example.mangalanguage.network.MangaApiClient
 import com.example.mangalanguage.network.MangaDexApiService
 import com.example.mangalanguage.viewModel.MangaFragmentViewModel
+import com.google.android.material.imageview.ShapeableImageView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -44,6 +47,9 @@ class MangaFragment : Fragment() {
 
     private lateinit var mangaDexApi: MangaDexApiService
 
+    private lateinit var searchImageButton: ShapeableImageView
+    private lateinit var searchView2: SearchView
+
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
@@ -52,6 +58,7 @@ class MangaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+
 
         return binding?.root
     }
@@ -93,6 +100,9 @@ class MangaFragment : Fragment() {
             }
 
         })
+
+
+
 
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean {

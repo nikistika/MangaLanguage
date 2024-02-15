@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id= "@+id/favoriteManga"
-        android:title="@string/library_manga"
-        android:icon="@drawable/baseline_favorite_border_24"/>
+        android:title="@string/manga"
+        android:icon="@drawable/baseline_menu_book_24"/>
 <item
         android:id= "@+id/cardsManga"
         android:title="@string/cards_manga"
