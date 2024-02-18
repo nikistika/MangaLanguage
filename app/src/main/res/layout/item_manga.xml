@@ -7,72 +7,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="30dp"
         >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="176dp"
-        android:background="@color/widget">
+        android:layout_height="130dp"
+        android:background="#302F2F">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/mangaImage"
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             android:src="@drawable/berserkimage"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mangaTitle"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Berserk"
-            android:textColor="@color/white_text"
-            android:textSize="18sp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/mangaImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mangaYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Год"
-            android:textColor="@color/white_text"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/mangaImage"
-            app:layout_constraintTop_toBottomOf="@+id/mangaTitle" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mangaTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Berserk"
+                android:textColor="@color/white_text"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/mangaImage"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mangaAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Автор"
-            android:textColor="@color/white_text"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/mangaImage"
-            app:layout_constraintTop_toBottomOf="@+id/mangaYear" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mangaYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:singleLine="true"
+                android:text="@string/Year"
+                android:textColor="@color/white_text"
+                android:textSize="14sp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mangaDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Описание"
-            android:textColor="@color/white_text"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/mangaImage"
-            app:layout_constraintTop_toBottomOf="@+id/mangaAuthor" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mangaAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:singleLine="true"
+                android:text="@string/Author"
+                android:textColor="@color/white_text"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

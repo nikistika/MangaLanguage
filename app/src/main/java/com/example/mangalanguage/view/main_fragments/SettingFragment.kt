@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.mangalanguage.databinding.FragmentFavoriteBinding
 import com.example.mangalanguage.databinding.FragmentSettingBinding
 import dagger.hilt.android.AndroidEntryPoint
 

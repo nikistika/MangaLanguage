@@ -7,6 +7,7 @@ import com.example.mangalanguage.models.MangaDex.MangaData.Title
 data class MangaDataResult(
     val title: Title,
     val year: String,
+    val author: String?,
     val description: Description,
     val id: String,
     val fileName: String?

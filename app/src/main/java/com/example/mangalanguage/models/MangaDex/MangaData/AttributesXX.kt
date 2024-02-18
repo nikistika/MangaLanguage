@@ -11,7 +11,7 @@ data class AttributesXX(
     val imageUrl: Any,
     val locale: String,
     val melonBook: Any,
-    val name: String,
+    val name: String?,
     val naver: Any,
     val nicoVideo: Any,
     val pixiv: Any,

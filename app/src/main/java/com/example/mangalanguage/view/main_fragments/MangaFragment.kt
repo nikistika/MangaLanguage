@@ -17,7 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangalanguage.adapters.manga_search_adapters.MangaSearchAdapterRV
-import com.example.mangalanguage.databinding.FragmentFavoriteBinding
+import com.example.mangalanguage.databinding.FragmentMangaBinding
 import com.example.mangalanguage.models.MangaDex.MangaDataResult
 import com.example.mangalanguage.network.MangaApiClient
 import com.example.mangalanguage.network.MangaDexApiService
@@ -37,7 +37,7 @@ class MangaFragment : Fragment() {
 
     private val viewModel: MangaFragmentViewModel by activityViewModels()
 
-    private var _binding: FragmentFavoriteBinding?= null
+    private var _binding: FragmentMangaBinding?= null
     private val binding get() = _binding
 
     private lateinit var adapter: MangaSearchAdapterRV
@@ -47,8 +47,6 @@ class MangaFragment : Fragment() {
 
     private lateinit var mangaDexApi: MangaDexApiService
 
-    private lateinit var searchImageButton: ShapeableImageView
-    private lateinit var searchView2: SearchView
 
 
     @SuppressLint("SuspiciousIndentation")
@@ -57,7 +55,7 @@ class MangaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        _binding = FragmentMangaBinding.inflate(inflater, container, false)
 
 
         return binding?.root
@@ -80,12 +78,16 @@ class MangaFragment : Fragment() {
 
             //forEach - функция-цикл, которая применяет функцию (в данном случае add) к каждому элементу списка)
             it.data.forEach { mangaItem ->
-                val coverArtRelationship = mangaItem.relationships.firstOrNull { it.type == "cover_art" }
+                val coverArtRelationship = mangaItem.relationships.firstOrNull { it -> it.type == "cover_art" }
                 val fileName = coverArtRelationship?.attributes?.fileName
+
+                val authorRelationship = mangaItem.relationships.firstOrNull { it.type == "author" }
+                val authorName = authorRelationship?.attributes?.name
 
                 val mangaResult = MangaDataResult(
                     title = mangaItem.attributes.title,
                     year = mangaItem.attributes.year.toString(),
+                    author = authorName,
                     description = mangaItem.attributes.description,
                     id = mangaItem.id,
                     fileName = fileName
@@ -102,7 +104,10 @@ class MangaFragment : Fragment() {
         })
 
 
-
+//        lifecycleScope.launch {
+//            viewModel.getMangaList("Наруто")
+//            mangaResultList = mutableListOf()
+//        }
 
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean {

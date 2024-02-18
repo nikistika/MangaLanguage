@@ -53,5 +53,10 @@
     <string name="setting_manga">Настройки</string>
     <string name="in_developing">Раздел находится в разработке</string>
 
+    <string name="Author">Автор</string>
+    <string name="Year">Год</string>
+    <string name="Description">Описание</string>
+    <string name="SearchResult">Результаты поиска:</string>
+
 
 </resources>
