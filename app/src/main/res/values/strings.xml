@@ -58,5 +58,8 @@
     <string name="Description">Описание</string>
     <string name="SearchResult">Результаты поиска:</string>
 
+    <string name="Translate">Перевести</string>
+    <string name="Orientation">Оринтация</string>
+    <string name="Mode">Режим</string>
 
 </resources>

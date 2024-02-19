@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id= "@+id/favoriteManga"
+        android:title="@string/Mode"
+        android:icon="@drawable/baseline_aod_24"/>
+    <item
+        android:id= "@+id/cardsManga"
+        android:title="@string/Orientation"
+        android:icon="@drawable/baseline_screen_rotation_24"/>
+
+    <item
+        android:id= "@+id/wordsManga"
+        android:title="@string/Translate"
+        android:icon="@drawable/baseline_translate_24"/>
+
+    <item
+        android:id= "@+id/settingManga"
+        android:title="@string/setting_manga"
+        android:icon="@drawable/baseline_settings_24"/>
+
+</menu>

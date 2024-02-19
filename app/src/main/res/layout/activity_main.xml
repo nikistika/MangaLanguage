@@ -35,14 +35,14 @@
         android:layout_height="wrap_content"
         android:padding="1dp"
         android:background="@color/widget"
-        app:itemTextColor="@color/white_text"
-        app:itemIconTint="@color/white_text"
+        app:itemTextColor="@color/bottom_nav_view_icon"
+        app:itemIconTint="@color/bottom_nav_view_icon"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/main_bottom_navigation_menu"
+        app:labelVisibilityMode="labeled"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
