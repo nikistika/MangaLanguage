@@ -20,6 +20,7 @@ import com.example.mangalanguage.network.MangaDexApiService
 import com.example.mangalanguage.view.MainActivity
 import com.example.mangalanguage.viewModel.ReaderVPViewModel
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -38,6 +39,8 @@ class ReaderActivityVP : AppCompatActivity() {
     lateinit var viewPagerAdapter: ReaderAdapterVP
     lateinit var fabTranslate: FloatingActionButton
 
+    lateinit var navigationView: BottomNavigationView
+
     private lateinit var mangadexApi: MangaDexApiService
 
     lateinit var binding: ActivityReader2Binding
@@ -50,6 +53,7 @@ class ReaderActivityVP : AppCompatActivity() {
         topAppBar = binding.topAppbar
         viewPager = binding.viewPager
         fabTranslate = binding.fbTranslate
+        navigationView = binding.bottomNavigationView
 
         mangadexApi = MangaApiClient.getInstance().create(MangaDexApiService::class.java)
 
@@ -79,6 +83,18 @@ class ReaderActivityVP : AppCompatActivity() {
         viewModel.mangaImageUrlResult.observe(this, Observer { imageUrl ->
             imageUrl?.let {
 
+//                navigationView.setOnNavigationItemSelectedListener { item ->
+//                    when (item.itemId) {
+//                            val intent = Intent(this, TranslateActivity::class.java)
+//                            Log.d("MyLog", "url: $imageUrl")
+//                                    intent.putExtra("message_key", imageUrl)
+//                            startActivity(intent)
+//                            true
+//                        }
+//                        else -> false
+//                    }
+
+
                 fabTranslate.setOnClickListener {
                     val intent = Intent(this, TranslateActivity::class.java)
                     Log.d("MyLog", "url: $imageUrl")
@@ -107,5 +123,16 @@ class ReaderActivityVP : AppCompatActivity() {
                 }
             }
         }
+
+        navigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.translateReader -> {
+                    viewPager.currentItem = 0 // Установка текущего элемента во ViewPager2
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 }
