@@ -26,4 +26,6 @@
     <color name="голубой">#87CEEB</color>
     <color name="салатовый">#63FAC0</color>
 
+    <color name="прозрачный">#00ffffff</color>
+
 </resources>
